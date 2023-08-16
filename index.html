@@ -9,15 +9,41 @@
     <script src="index.js"></script>
     <link rel="stylesheet" href="styles.css">
 
+    <script src="https://code.jquery.com/jquery-3.7.0.slim.js" integrity="sha256-7GO+jepT9gJe9LB4XFf8snVOjX3iYNb0FHYr5LI1N5c=" crossorigin="anonymous"></script>
+
     <title>Kaltura medias from category</title>
 </head>
 <body>
     <h1>Kaltura medias category</h1>
-    <p>Type a category ID in the input</p>
 
-    <div class="input-div">
-        <input type="number" id="categoryId-input" class="form-control" placeholder="12345">
-        <button class="btn btn-primary" onClick="">Submit</button>
+    <div class="input-div" id="adminSecret-div">
+        <div>
+            <input type="text" id="adminSecret-input" class="form-control" placeholder="qWertyZuiopX9823L65512==">
+            <small><i>Type in your <strong>Administrator Secret</strong> that you can find on <a
+                        href="https://api.cast.switch.ch/index.php/kmcng/settings/integrationSettings"
+                        target="_blank">this page</a> </i></small>
+        </div>
+        <button class="btn btn-primary adapt-button-size" onclick="setLocalStorage('adminSecret', document.getElementById('adminSecret-input').value)">Submit</button>
+    </div>
+
+
+    <div class="input-div" id="partnerId-div">
+        <div>
+            <input type="number" id="partnerId-input" class="form-control" placeholder="500">
+            <small><i>Type in your <strong>Partner ID</strong> that you can find on <a
+                        href="https://api.cast.switch.ch/index.php/kmcng/settings/integrationSettings"
+                        target="_blank">this page</a> </i></small>
+        </div>
+        <button class="btn btn-primary adapt-button-size" onclick="setLocalStorage('partnerId', document.getElementById('partnerId-input').value)">Submit</button>
+    </div>
+
+    <hr class="category d-none">
+    <div class="category input-div d-none">
+        <div>
+            <input type="number" id="categoryId-input" class="form-control" placeholder="12345">
+            <small><i>Type in the <strong>Category ID</strong> that you want to get the medias from. </i></small>
+        </div>
+        <button class="btn btn-primary adapt-button-size" onClick="">Submit</button>
     </div>
 </body>
 </html>

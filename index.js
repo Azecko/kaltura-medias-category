@@ -9,3 +9,39 @@ async function getMediasFromCategory(ks, categoryID) {
     let data = await response.json()
     return data
 }
+
+var localStorageName = 'kaltura-medias-category'
+
+$( document ).ready(function() {
+    var storageObject = JSON.parse(localStorage.getItem(localStorageName))
+    if(!storageObject) {
+        return;
+    }
+
+    if(storageObject.adminSecret) {
+        $('#adminSecret-input').val(storageObject.adminSecret)
+    }
+
+    if(storageObject.partnerId) {
+        $('#partnerId-input').val(storageObject.partnerId)
+    }
+
+    if(storageObject.adminSecret && storageObject.partnerId) {
+        $('.category').removeClass('d-none')
+    }
+});
+
+function setLocalStorage(key, value) {
+    var storageObject = JSON.parse(localStorage.getItem(localStorageName))
+    if(!storageObject) storageObject = {}
+
+    storageObject[key] = value
+
+    localStorage.setItem(localStorageName, JSON.stringify(storageObject))
+
+    if(storageObject.adminSecret && storageObject.partnerId) {
+        $('.category').removeClass('d-none')
+    } else {
+        $('.category').addClass('d-none')
+    }
+}

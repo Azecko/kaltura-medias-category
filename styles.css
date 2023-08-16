@@ -6,8 +6,9 @@ body {
     display: flex;
     flex-direction: row;
     gap: 20px;
+    margin-bottom: 50px;
 }
 
-#categoryId-input {
-    width: 20%;
+.adapt-button-size {
+    height: 70%;
 }
