@@ -1,0 +1,13 @@
+body {
+    margin: 30px;
+}
+
+.input-div {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+#categoryId-input {
+    width: 20%;
+}
