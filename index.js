@@ -21,7 +21,7 @@ var localStorageName = 'kaltura-medias-category'
 $( document ).ready(function() {
     var storageObject = JSON.parse(localStorage.getItem(localStorageName))
     if(!storageObject) {
-        return;
+        storageObject = {}
     }
 
     if(storageObject.adminSecret) {
@@ -43,6 +43,18 @@ $( document ).ready(function() {
         } else {
             $('#categoryId-button').prop('disabled', false);
         }
+    });
+
+    $('#adminSecret-input').on('input',function(e){
+        let inputValue = $('#adminSecret-input').val()
+        
+        setLocalStorage('adminSecret', inputValue)
+    });
+
+    $('#partnerId-input').on('input',function(e){
+        let inputValue = $('#partnerId-input').val()
+        
+        setLocalStorage('partnerId', inputValue)
     });
 });
 
@@ -70,6 +82,14 @@ function getMedias(categoryId) {
 
     createKS(adminSecret, partnerId).then(ks => {
         getMediasFromCategory(ks, categoryId).then(data => {
+            if(data.code) {
+                $('.alert-warning').html(`An error occured. Error : ${data.code}`)
+                $('.alert-warning').removeClass('d-none')
+                $("#medias-div").addClass('d-none')
+                $(".tbody-medias").html("")
+                return;
+            }
+
             let media = data.objects
             if(!media.length) {
                 $('.alert-warning').html("Category doesn't exist or is empty.")
