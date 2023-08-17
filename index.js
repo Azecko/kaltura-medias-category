@@ -10,6 +10,12 @@ async function getMediasFromCategory(ks, categoryID) {
     return data
 }
 
+async function getCategoryById(ks, categoryID) {
+    let response = await fetch(`https://api.cast.switch.ch/api_v3/service/category/action/get?ks=${ks}&id=${categoryID}&format=1`)
+    let data = await response.json()
+    return data
+}
+
 var localStorageName = 'kaltura-medias-category'
 
 $( document ).ready(function() {
@@ -52,6 +58,8 @@ function setLocalStorage(key, value) {
         $('.category').removeClass('d-none')
     } else {
         $('.category').addClass('d-none')
+        $("#medias-div").addClass('d-none')
+        $(".tbody-medias").html("")
     }
 }
 
@@ -66,11 +74,38 @@ function getMedias(categoryId) {
             if(!media.length) {
                 $('.alert-warning').html("Category doesn't exist or is empty.")
                 $('.alert-warning').removeClass('d-none')
+                $("#medias-div").addClass('d-none')
+                $(".tbody-medias").html("")
+            } else {
+
+                getCategoryById(ks, categoryId).then(data => {
+                    $('#category-title').html(data.name)
+                })
+
+                $(`#download-all-medias-button`).unbind()
+
+                $(`#download-all-medias-button`).click(function(e) {
+                    data.objects.map(media => {
+                        e.preventDefault();
+                        window.open(media.downloadUrl);
+                    })
+                });
+
+                $(".tbody-medias").html("")
+                data.objects.map(media => {
+                    $('.alert-warning').addClass('d-none')
+                    $("#medias-div").removeClass('d-none')
+                    $(".tbody-medias").append(`<tr id="tr-${media.id}"></tr>`)
+                    $(`#tr-${media.id}`).append(`<td>${media.name}</td>`)
+                    $(`#tr-${media.id}`).append(`<td><a id="download-${media.id}" href="#">Download media</a></td>`)
+                    
+                    $(`#download-${media.id}`).click(function(e) {
+                        e.preventDefault();
+                        window.open(media.downloadUrl);
+                    });
+                })
             }
 
-            data.objects.map(media => {
-                console.log(media.id)
-            })
         })
     })
 }

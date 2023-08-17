@@ -50,5 +50,23 @@
         </div>
         <button id="categoryId-button" class="btn btn-primary adapt-button-size" disabled onclick="getMedias(document.getElementById('categoryId-input').value)">Submit</button>
     </div>
+
+    <hr>
+
+    <div id="medias-div" class="d-none">
+        <h4 id="category-title"></h4>
+        <button id="download-all-medias-button" class="btn btn-primary">Download all medias</button>
+        <hr>
+        <table class="table table-boxed" id="medias-table" data-tablesaw-sortable>
+            <thead>
+              <tr>
+                <th data-tablesaw-sortable-col>Media name</th>
+                <th data-tablesaw-sortable-col>Download</th>
+              </tr>
+            </thead>
+            <tbody class="tbody-medias"></tbody>
+        </table>
+    </div>
+
 </body>
 </html>
