@@ -12,3 +12,8 @@ body {
 .adapt-button-size {
     height: 70%;
 }
+
+#favicon-title {
+    width: 65px;
+    padding-bottom: 10px;
+}
