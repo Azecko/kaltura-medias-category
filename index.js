@@ -116,7 +116,7 @@ function getMedias(categoryId) {
                     $('.alert-warning').addClass('d-none')
                     $("#medias-div").removeClass('d-none')
                     $(".tbody-medias").append(`<tr id="tr-${media.id}"></tr>`)
-                    $(`#tr-${media.id}`).append(`<td>${media.name}</td>`)
+                    $(`#tr-${media.id}`).append(`<td><a href="${media.dataUrl} target="_blank">${media.name}</a></td>`)
                     $(`#tr-${media.id}`).append(`<td><a id="download-${media.id}" href="#">Download media</a></td>`)
                     
                     $(`#download-${media.id}`).click(function(e) {
