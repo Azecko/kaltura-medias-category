@@ -16,6 +16,36 @@ async function getCategoryById(ks, categoryID) {
     return data
 }
 
+async function getAllCategories(ks) {
+    let response = await fetch(`https://api.cast.switch.ch/api_v3/service/category/action/list?ks=${ks}&format=1`)
+    let data = await response.json()
+    return data
+}
+
+function setCategoriesAutocomplete(adminSecret, partnerId) {
+    let categories = [];
+    $('#categoryId-input').autocomplete({
+        source: categories
+    })
+    createKS(adminSecret, partnerId).then(ks => {
+        if(typeof(ks) !== "object") {
+            getAllCategories(ks).then(data => {
+                if(data.objects) {
+                    categories = data.objects.map(category => {
+                        return {
+                            label: `${category.id.toString()} - ${category.name}`,
+                            value: category.id.toString()
+                        }
+                    })
+                    $('#categoryId-input').autocomplete({
+                        source: categories
+                    })
+                }
+            })
+        }
+    })
+}
+
 var localStorageName = 'kaltura-medias-category'
 
 $( document ).ready(function() {
@@ -34,6 +64,7 @@ $( document ).ready(function() {
 
     if(storageObject.adminSecret && storageObject.partnerId) {
         $('.category').removeClass('d-none')
+        setCategoriesAutocomplete(storageObject.adminSecret, storageObject.partnerId)
     }
 
     $('#categoryId-input').on('input',function(e){
@@ -68,6 +99,7 @@ function setLocalStorage(key, value) {
 
     if(storageObject.adminSecret && storageObject.partnerId) {
         $('.category').removeClass('d-none')
+        setCategoriesAutocomplete(storageObject.adminSecret, storageObject.partnerId)
     } else {
         $('.category').addClass('d-none')
         $("#medias-div").addClass('d-none')
