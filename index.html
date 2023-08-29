@@ -9,7 +9,10 @@
     <script src="index.js"></script>
     <link rel="stylesheet" href="styles.css">
 
-    <script src="https://code.jquery.com/jquery-3.7.0.slim.js" integrity="sha256-7GO+jepT9gJe9LB4XFf8snVOjX3iYNb0FHYr5LI1N5c=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+    integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 
 
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
@@ -52,7 +55,7 @@
     <hr class="category d-none">
     <div class="category input-div d-none">
         <div>
-            <input type="number" id="categoryId-input" class="form-control" placeholder="12345">
+            <input id="categoryId-input" class="form-control" placeholder="12345">
             <small><i>Type in the <strong>Category ID</strong> that you want to get the medias from. </i></small>
         </div>
         <button id="categoryId-button" class="btn btn-primary adapt-button-size" disabled onclick="getMedias(document.getElementById('categoryId-input').value)">Submit</button>
