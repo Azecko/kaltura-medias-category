@@ -135,6 +135,7 @@ function getMedias(categoryId) {
                 })
 
                 $(`#download-all-medias-button`).unbind()
+                $(`#download-all-medias-button`).html(`Download all medias (${data.objects.length})`)
 
                 $(`#download-all-medias-button`).click(function(e) {
                     data.objects.map(media => {
