@@ -5,7 +5,7 @@ async function createKS(adminSecret, partnerId) {
 }
 
 async function getMediasFromCategory(ks, categoryID) {
-    let response = await fetch(`https://api.cast.switch.ch/api_v3/service/media/action/list?ks=${ks}&filter[categoriesIdsMatchAnd]=${categoryID}&filter[objectType]=KalturaMediaEntryFilter&format=1`)
+    let response = await fetch(`https://api.cast.switch.ch/api_v3/service/media/action/list?ks=${ks}&filter[categoriesIdsMatchAnd]=${categoryID}&filter[objectType]=KalturaMediaEntryFilter&format=1&pager[pageSize]=500`)
     let data = await response.json()
     return data
 }
