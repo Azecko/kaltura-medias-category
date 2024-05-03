@@ -63,6 +63,14 @@
 
     <hr>
 
+    <div class="category input-div d-none">
+        <div>
+            <input id="userId-input" class="form-control" placeholder="12345@epfl.ch">
+            <small><i>Type in the <strong>User ID</strong> that you want to get the medias from. </i></small>
+        </div>
+        <button id="userId-button" class="btn btn-primary adapt-button-size" disabled onclick="getMediasUser(document.getElementById('userId-input').value)">Submit</button>
+    </div>
+
     <div id="medias-div" class="d-none">
         <h4 id="category-title"></h4>
         <button id="download-all-medias-button" class="btn btn-primary">Download all medias</button>
